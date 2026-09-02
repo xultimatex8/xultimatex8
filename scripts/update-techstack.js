@@ -46,10 +46,16 @@ const MANIFEST_RULES = [
     { match: /flask/i, tech: "flask" },
   ]},
   { file: "pom.xml", contains: [
-    { match: /spring-boot/i, tech: "spring" },
+  { match: /<artifactId>\s*spring-boot-[^<]+<\/artifactId>/i, tech: "spring" },
+  { match: /org\.springframework/i, tech: "spring" },
   ]},
   { file: "build.gradle", contains: [
-    { match: /spring-boot/i, tech: "spring" },
+  { match: /org\.springframework/i, tech: "spring" },
+  { match: /spring-boot/i, tech: "spring" },
+  ]},
+  { file: "build.gradle.kts", contains: [
+  { match: /org\.springframework/i, tech: "spring" },
+  { match: /spring-boot/i, tech: "spring" },
   ]},
   { file: "docker-compose.yml", contains: [
     { match: /postgres/i, tech: "postgres" },
@@ -60,14 +66,14 @@ const MANIFEST_RULES = [
   ]},
 ];
 
-const GITHUB_LANG_TO_SKILL = { 
-    "C#": "cs", 
-    "Java": "java", 
-    "Python": "python", 
-    "TypeScript": "ts", 
-    "JavaScript": "js", 
-    "HTML": "html", 
-    "CSS": "css" 
+const GITHUB_LANG_TO_SKILL = {
+  "C#": "cs",
+  "Java": "java",
+  "Python": "python",
+  "TypeScript": "ts",
+  "JavaScript": "js",
+  "HTML": "html",
+  "CSS": "css"
 };
 
 async function gh(pathname) {
@@ -155,6 +161,7 @@ async function detectTechForRepo(repo) {
 
   const langs = await gh(`/repos/${owner}/${name}/languages`);
   if (langs) {
+    console.log(`${repo.full_name} languages:`, Object.keys(langs));
     for (const lang of Object.keys(langs)) {
       const slug = GITHUB_LANG_TO_SKILL[lang];
       if (slug) found.add(slug);
@@ -167,8 +174,15 @@ async function detectTechForRepo(repo) {
     const content = await getFileContent(owner, name, rule.file);
     if (!content) continue;
     for (const c of rule.contains) {
-      if (c.match.test(content)) found.add(c.tech);
+      if (c.match.test(content)) {
+        console.log(`${repo.full_name}: detected ${c.tech} from ${rule.file}`);
+        found.add(c.tech);
+      }
     }
+  }
+
+  if (found.size > 0) {
+    console.log(`${repo.full_name} detected:`, Array.from(found));
   }
 
   return found;
@@ -191,7 +205,7 @@ async function main() {
   allTech.add("github");
 
   const iconsList = Array.from(allTech).sort().join(",");
-  const badge = `<p align="left">\n  <img src="https://skillicons.dev/icons?i=${iconsList}" alt="Tech stack" />\n</p>`;
+  const badge = `\n  <img src="https://skillicons.dev/icons?i=${iconsList}" alt="Tech stack" />\n</p>`;
 
   let readme = readFileSync(README_PATH, "utf8");
 
