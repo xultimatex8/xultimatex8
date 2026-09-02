@@ -12,14 +12,11 @@ I'm always learning and experimenting with new technologies by building things.
 ## Tech Stack
 
 <!--TECH-STACK:START-->
-
-<!-- This section is auto-regenerated weekly by scanning your public repos. Do not edit by hand. -->
-
-<p align="left">
-  <img src="https://skillicons.dev/icons?i=cs,java,python,ts,js" alt="Tech stack" />
+    <!-- This section is auto-regenerated weekly by scanning your public repos. Do not edit by hand. -->
+    <p align="left">
+  <img src="https://skillicons.dev/icons?i=django,git,github,nextjs,postgres,react,tailwind,ts" alt="Tech stack" />
 </p>
-
-<!--TECH-STACK:END-->
+    <!--TECH-STACK:END-->
 
 *(Auto-generated from my public repos — see the [workflow](.github/workflows/update-techstack.yml))*
 
