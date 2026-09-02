@@ -87,7 +87,7 @@ async function listRepos() {
   const repos = [];
   let page = 1;
   while (true) {
-    const batch = await gh(`/users/${USERNAME}/repos?per_page=100&page=${page}&type=owner`);
+    const batch = await gh(`/users/${USERNAME}/repos?per_page=100&page=${page}&affiliation=owner,collaborator,organization_member&visibility=public`);
 
     if (!batch || batch.length === 0) break;
 
@@ -96,57 +96,6 @@ async function listRepos() {
   }
 
   return repos;
-}
-
-async function listOrganizations() {
-  const organizations = [];
-  let page = 1;
-  while (true) {
-    const batch = await gh(`/user/orgs?per_page=100&page=${page}`);
-    if (!batch || batch.length === 0) break;
-    organizations.push(...batch);
-    page++;
-  }
-  console.log("Organizations:", organizations.map((org) => org.login));
-  return organizations;
-}
-
-async function listOrganizationRepos(org) {
-  const repos = [];
-  let page = 1;
-  while (true) {
-    const batch = await gh(`/orgs/${org}/repos?per_page=100&page=${page}&type=all`);
-    if (!batch || batch.length === 0) break;
-    repos.push(...batch.filter((r) => !r.fork));
-    page++;
-  }
-  return repos;
-}
-
-async function listAllRepos() {
-  const repos = new Map();
-
-  const userRepos = await listRepos();
-
-  for (const repo of userRepos) {
-    repos.set(repo.full_name, repo);
-  }
-
-  const organizations = await listOrganizations();
-
-  for (const organization of organizations) {
-    try {
-      const organizationRepos = await listOrganizationRepos(organization.login);
-
-      for (const repo of organizationRepos) {
-        repos.set(repo.full_name, repo);
-      }
-    } catch (err) {
-      console.warn(`Warning: could not scan organization ${organization.login}: ${err.message}`);
-    }
-  }
-
-  return Array.from(repos.values());
 }
 
 async function getFileContent(owner, repo, filePath) {
@@ -190,7 +139,7 @@ async function detectTechForRepo(repo) {
 }
 
 async function main() {
-  const repos = await listAllRepos();
+  const repos = await listRepos();
   const allTech = new Set();
 
   for (const repo of repos) {
