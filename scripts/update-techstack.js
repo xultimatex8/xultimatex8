@@ -217,17 +217,19 @@ function formatCategory(title, technologies) {
     .map((tech) => `\`${tech.name}\``)
     .join(" · ");
 
-  let output = `### ${title}\n\n`;
+  let output = `### ${title}\n`;
 
   if (icons.length > 0) {
-    output += `<p align="left">\n  <img src="https://skillicons.dev/icons?i=${icons.join(",")}" alt="${title}" />\n</p>\n`;
+    output += `<p align="left">\n`;
+    output += `  <img src="https://skillicons.dev/icons?i=${icons.join(",")}" alt="${title}" />\n`;
+    output += `</p>\n`;
   }
 
   if (text) {
-    output += `\n${text}\n`;
+    output += `${text}\n`;
   }
 
-  return output;
+  return `${output}\n`;
 }
 
 async function main() {
@@ -274,7 +276,7 @@ async function main() {
   readme = readme.replace(
     /<!--TECH-STACK:START-->[\s\S]*?<!--TECH-STACK:END-->/,
     `<!--TECH-STACK:START-->
-    ${techStack}<!--TECH-STACK:END-->`
+  ${techStack}<!--TECH-STACK:END-->`
   );
 
   writeFileSync(README_PATH, readme);
