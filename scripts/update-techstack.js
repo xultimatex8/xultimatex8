@@ -87,13 +87,15 @@ async function listRepos() {
   const repos = [];
   let page = 1;
   while (true) {
-    const batch = await gh(`/users/${USERNAME}/repos?per_page=100&page=${page}&affiliation=owner,collaborator,organization_member&visibility=public`);
+    const batch = await gh(`/user/repos?per_page=100&page=${page}&affiliation=owner,collaborator,organization_member&visibility=public`);
 
     if (!batch || batch.length === 0) break;
 
     repos.push(...batch.filter((r) => !r.fork));
     page++;
   }
+
+  console.log("Repositories:", repos.map((r) => r.full_name));
 
   return repos;
 }
