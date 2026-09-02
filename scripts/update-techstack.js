@@ -117,15 +117,25 @@ async function detectTechForRepo(repo) {
     }
   }
 
-  if (await getFileContent(owner, name, "Dockerfile")) found.add("docker");
+  const tree = await gh(`/repos/${owner}/${name}/git/trees/${repo.default_branch}?recursive=1`);
 
-  for (const rule of MANIFEST_RULES) {
-    const content = await getFileContent(owner, name, rule.file);
-    if (!content) continue;
-    for (const c of rule.contains) {
-      if (c.match.test(content)) {
-        console.log(`${repo.full_name}: detected ${c.tech} from ${rule.file}`);
-        found.add(c.tech);
+  if (tree && tree.tree) {
+    for (const file of tree.tree) {
+      if (file.type !== "blob") continue;
+
+      const rule = MANIFEST_RULES.find((r) => file.path === r.file || file.path.endsWith(`/${r.file}`));
+
+      if (!rule) continue;
+
+      const content = await getFileContent(owner, name, file.path);
+
+      if (!content) continue;
+
+      for (const c of rule.contains) {
+        if (c.match.test(content)) {
+          console.log(`${repo.full_name}: detected ${c.tech} from ${file.path}`);
+          found.add(c.tech);
+        }
       }
     }
   }
