@@ -203,33 +203,25 @@ async function detectTechForRepo(repo) {
 function formatCategory(title, technologies) {
   const detected = Array.from(technologies)
     .map((tech) => TECH[tech])
-    .filter(Boolean)
+    .filter((tech) => tech && tech.icon)
     .sort((a, b) => a.name.localeCompare(b.name));
 
   if (detected.length === 0) return "";
 
-  const icons = detected
-    .filter((tech) => tech.icon)
-    .map((tech) => tech.icon);
+  const icons = detected.map((tech) => tech.icon);
+  const rows = [];
 
-  const text = detected
-    .filter((tech) => !tech.icon)
-    .map((tech) => `\`${tech.name}\``)
-    .join(" · ");
-
-  let output = `### ${title}\n`;
-
-  if (icons.length > 0) {
-    output += `<p align="left">\n`;
-    output += `  <img src="https://skillicons.dev/icons?i=${icons.join(",")}" alt="${title}" />\n`;
-    output += `</p>\n`;
+  for (let i = 0; i < icons.length; i += 3) {
+    rows.push(
+      `<img src="https://skillicons.dev/icons?i=${icons.slice(i, i + 3).join(",")}&perline=3" height="50">`
+    );
   }
 
-  if (text) {
-    output += `${text}\n`;
-  }
-
-  return `${output}\n`;
+  return `<td width="25%" align="center" valign="top">
+<strong>${title}</strong>
+<br><br>
+${rows.join("<br>")}
+</td>`;
 }
 
 async function main() {
@@ -262,14 +254,14 @@ async function main() {
     }
   }
 
-  const techStack = [
-    formatCategory("Languages", categories.languages),
-    formatCategory("Backend", categories.backend),
-    formatCategory("Frontend", categories.frontend),
-    formatCategory("Tools", categories.tools),
-  ]
-    .filter(Boolean)
-    .join("\n");
+  const techStack = `<table width="100%">
+  <tr>
+  ${formatCategory("Languages", categories.languages)}
+  ${formatCategory("Backend", categories.backend)}
+  ${formatCategory("Frontend", categories.frontend)}
+  ${formatCategory("Tools", categories.tools)}
+  </tr>
+  </table>`;
 
   let readme = readFileSync(README_PATH, "utf8");
 
