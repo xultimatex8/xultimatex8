@@ -59,14 +59,14 @@ const MANIFEST_RULES = [
   ]},
 ];
 
-const EXT_TO_LANG = {
-  cs: "cs",
-  java: "java",
-  py: "python",
-  ts: "ts",
-  tsx: "ts",
-  js: "js",
-  jsx: "js",
+const GITHUB_LANG_TO_SKILL = { 
+    "C#": "cs", 
+    "Java": "java", 
+    "Python": "python", 
+    "TypeScript": "ts", 
+    "JavaScript": "js", 
+    "HTML": "html", 
+    "CSS": "css" 
 };
 
 async function gh(pathname) {
@@ -102,7 +102,7 @@ async function detectTechForRepo(repo) {
   const langs = await gh(`/repos/${owner}/${name}/languages`);
   if (langs) {
     for (const lang of Object.keys(langs)) {
-      const slug = EXT_TO_LANG[lang.toLowerCase()];
+      const slug = GITHUB_LANG_TO_SKILL[lang];
       if (slug) found.add(slug);
     }
   }
@@ -144,7 +144,6 @@ async function main() {
   readme = readme.replace(
     /<!--TECH-STACK:START-->[\s\S]*?<!--TECH-STACK:END-->/,
     `<!--TECH-STACK:START-->
-    <!-- This section is auto-regenerated weekly by scanning your public repos. Do not edit by hand. -->
     ${badge}
     <!--TECH-STACK:END-->`
   );
