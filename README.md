@@ -12,7 +12,8 @@ I'm always learning and experimenting with new technologies by building things.
 ## Tech Stack
 
 <!--TECH-STACK:START-->
-  <img src="https://skillicons.dev/icons?i=django,git,github,nextjs,postgres,react,tailwind,ts" alt="Tech stack" />
+    <p align="left">
+  <img src="https://skillicons.dev/icons?i=cs,css,django,git,github,html,js,nextjs,postgres,python,react,tailwind,ts" alt="Tech stack" />
 </p>
     <!--TECH-STACK:END-->
 
