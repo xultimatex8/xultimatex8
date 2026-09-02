@@ -12,9 +12,22 @@ I'm always learning and experimenting with new technologies by building things.
 ## Tech Stack
 
 <!--TECH-STACK:START-->
-    
-  <img src="https://skillicons.dev/icons?i=angular,cs,css,django,fastapi,git,github,html,java,js,nestjs,nextjs,postgres,python,react,socketio,spring,tailwind,ts" alt="Tech stack" />
-</p>
+    ### Languages
+
+`C#` · `CSS` · `HTML` · `Java` · `JavaScript` · `Python` · `TypeScript`
+
+### Backend
+
+`Django` · `FastAPI` · `NestJS` · `PostgreSQL` · `Socket.IO` · `Spring`
+
+### Frontend
+
+`Angular` · `Next.js` · `React` · `Tailwind CSS`
+
+### Tools
+
+`Docker` · `Git` · `GitHub`
+
     <!--TECH-STACK:END-->
 
 *(Auto-generated from my public repos — see the [workflow](.github/workflows/update-techstack.yml))*
