@@ -46,16 +46,13 @@ const MANIFEST_RULES = [
     { match: /flask/i, tech: "flask" },
   ]},
   { file: "pom.xml", contains: [
-  { match: /<artifactId>\s*spring-boot-[^<]+<\/artifactId>/i, tech: "spring" },
-  { match: /org\.springframework/i, tech: "spring" },
+    { match: /spring-boot|org\.springframework/i, tech: "spring" },
   ]},
   { file: "build.gradle", contains: [
-  { match: /org\.springframework/i, tech: "spring" },
-  { match: /spring-boot/i, tech: "spring" },
+    { match: /spring-boot|org\.springframework/i, tech: "spring" },
   ]},
   { file: "build.gradle.kts", contains: [
-  { match: /org\.springframework/i, tech: "spring" },
-  { match: /spring-boot/i, tech: "spring" },
+    { match: /spring-boot|org\.springframework/i, tech: "spring" },
   ]},
   { file: "docker-compose.yml", contains: [
     { match: /postgres/i, tech: "postgres" },
