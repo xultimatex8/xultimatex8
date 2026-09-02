@@ -107,6 +107,7 @@ async function listOrganizations() {
     organizations.push(...batch);
     page++;
   }
+  console.log("Organizations:", organizations.map((org) => org.login));
   return organizations;
 }
 
