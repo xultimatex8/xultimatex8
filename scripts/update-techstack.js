@@ -1,16 +1,21 @@
 import { readFileSync, writeFileSync } from "fs";
-import { join } from "path";
+import { dirname, join } from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const USERNAME = process.env.GITHUB_USERNAME;
 const TOKEN = process.env.GH_TOKEN;
+
 const README_PATH = join(__dirname, "..", "README.md");
+const API = "https://api.github.com";
 
 if (!USERNAME || !TOKEN) {
   console.error("Missing GITHUB_USERNAME or GH_TOKEN environment variables.");
   process.exit(1);
 }
 
-const API = "https://api.github.com";
 const headers = {
   Authorization: `Bearer ${TOKEN}`,
   Accept: "application/vnd.github+json",
@@ -86,6 +91,7 @@ async function listRepos() {
 async function getFileContent(owner, repo, filePath) {
   const data = await gh(`/repos/${owner}/${repo}/contents/${filePath}`);
   if (!data || !data.content) return null;
+
   return Buffer.from(data.content, "base64").toString("utf8");
 }
 
@@ -134,9 +140,13 @@ async function main() {
   const badge = `<p align="left">\n  <img src="https://skillicons.dev/icons?i=${iconsList}" alt="Tech stack" />\n</p>`;
 
   let readme = readFileSync(README_PATH, "utf8");
+
   readme = readme.replace(
-    /<!--TECH-STACK:START-->[\s\S]*<!--TECH-STACK:END-->/,
-    `<!--TECH-STACK:START-->\n<!-- This section is auto-regenerated weekly by scanning your public repos. Do not edit by hand. -->\n${badge}\n<!--TECH-STACK:END-->`
+    /<!--TECH-STACK:START-->[\s\S]*?<!--TECH-STACK:END-->/,
+    `<!--TECH-STACK:START-->
+    <!-- This section is auto-regenerated weekly by scanning your public repos. Do not edit by hand. -->
+    ${badge}
+    <!--TECH-STACK:END-->`
   );
 
   writeFileSync(README_PATH, readme);

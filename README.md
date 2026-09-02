@@ -11,9 +11,15 @@ I'm always learning and experimenting with new technologies by building things.
 
 ## Tech Stack
 
+<!--TECH-STACK:START-->
+
+<!-- This section is auto-regenerated weekly by scanning your public repos. Do not edit by hand. -->
+
 <p align="left">
-  <img src="https://skillicons.dev/icons?i=cs,java,python,ts,js" alt="Languages" />
+  <img src="https://skillicons.dev/icons?i=cs,java,python,ts,js" alt="Tech stack" />
 </p>
+
+<!--TECH-STACK:END-->
 
 *(Auto-generated from my public repos — see the [workflow](.github/workflows/update-techstack.yml))*
 
