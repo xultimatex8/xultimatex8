@@ -13,7 +13,7 @@ I'm always learning and experimenting with new technologies by building things.
 
 <!--TECH-STACK:START-->
     
-  <img src="https://skillicons.dev/icons?i=cs,css,django,git,github,html,js,nextjs,postgres,python,react,tailwind,ts" alt="Tech stack" />
+  <img src="https://skillicons.dev/icons?i=cs,css,django,git,github,html,java,js,nextjs,postgres,python,react,tailwind,ts" alt="Tech stack" />
 </p>
     <!--TECH-STACK:END-->
 
