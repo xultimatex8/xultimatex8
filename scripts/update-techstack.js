@@ -23,61 +23,92 @@ const headers = {
   "User-Agent": USERNAME,
 };
 
-const MANIFEST_RULES = [
-  { file: "package.json", contains: [
-    { match: /"react"\s*:/, tech: "React", category: "frontend" },
-    { match: /"next"\s*:/, tech: "Next.js", category: "frontend" },
-    { match: /"@angular\/core"\s*:/, tech: "Angular", category: "frontend" },
-    { match: /"vue"\s*:/, tech: "Vue", category: "frontend" },
-    { match: /"@nestjs\/core"\s*:/, tech: "NestJS", category: "backend" },
-    { match: /"express"\s*:/, tech: "Express", category: "backend" },
-    { match: /"tailwindcss"\s*:/, tech: "Tailwind CSS", category: "frontend" },
-    { match: /"socket\.io"\s*:/, tech: "Socket.IO", category: "backend" },
-  ]},
-  { file: "requirements.txt", contains: [
-    { match: /fastapi/i, tech: "FastAPI", category: "backend" },
-    { match: /django/i, tech: "Django", category: "backend" },
-    { match: /flask/i, tech: "Flask", category: "backend" },
-  ]},
-  { file: "pyproject.toml", contains: [
-    { match: /fastapi/i, tech: "FastAPI", category: "backend" },
-    { match: /django/i, tech: "Django", category: "backend" },
-    { match: /flask/i, tech: "Flask", category: "backend" },
-  ]},
-  { file: "pom.xml", contains: [
-    { match: /spring-boot|org\.springframework/i, tech: "Spring", category: "backend" },
-  ]},
-  { file: "build.gradle", contains: [
-    { match: /spring-boot|org\.springframework/i, tech: "Spring", category: "backend" },
-  ]},
-  { file: "build.gradle.kts", contains: [
-    { match: /spring-boot|org\.springframework/i, tech: "Spring", category: "backend" },
-  ]},
-  { file: "docker-compose.yml", contains: [
-    { match: /postgres/i, tech: "PostgreSQL", category: "backend" },
-    { match: /neo4j/i, tech: "Neo4j", category: "backend" },
-    { match: /redis/i, tech: "Redis", category: "backend" },
-    { match: /mysql/i, tech: "MySQL", category: "backend" },
-    { match: /mongo/i, tech: "MongoDB", category: "backend" },
-  ]},
-  { file: "docker-compose.yaml", contains: [
-    { match: /postgres/i, tech: "PostgreSQL", category: "backend" },
-    { match: /neo4j/i, tech: "Neo4j", category: "backend" },
-    { match: /redis/i, tech: "Redis", category: "backend" },
-    { match: /mysql/i, tech: "MySQL", category: "backend" },
-    { match: /mongo/i, tech: "MongoDB", category: "backend" },
-  ]},
-];
+const TECH = {
+  cs: { name: "C#", icon: "cs", category: "languages" },
+  java: { name: "Java", icon: "java", category: "languages" },
+  python: { name: "Python", icon: "python", category: "languages" },
+  ts: { name: "TypeScript", icon: "ts", category: "languages" },
+  js: { name: "JavaScript", icon: "js", category: "languages" },
+  html: { name: "HTML", icon: "html", category: "languages" },
+  css: { name: "CSS", icon: "css", category: "languages" },
+
+  dotnet: { name: ".NET", icon: "dotnet", category: "backend" },
+  spring: { name: "Spring", icon: "spring", category: "backend" },
+  nestjs: { name: "NestJS", icon: "nestjs", category: "backend" },
+  express: { name: "Express", icon: "express", category: "backend" },
+  django: { name: "Django", icon: "django", category: "backend" },
+  fastapi: { name: "FastAPI", icon: "fastapi", category: "backend" },
+  postgres: { name: "PostgreSQL", icon: "postgres", category: "backend" },
+  mysql: { name: "MySQL", icon: "mysql", category: "backend" },
+  mongodb: { name: "MongoDB", icon: "mongodb", category: "backend" },
+  redis: { name: "Redis", icon: "redis", category: "backend" },
+  neo4j: { name: "Neo4j", icon: "neo4j", category: "backend" },
+  socketio: { name: "Socket.IO", icon: null, category: "backend" },
+
+  react: { name: "React", icon: "react", category: "frontend" },
+  nextjs: { name: "Next.js", icon: "nextjs", category: "frontend" },
+  angular: { name: "Angular", icon: "angular", category: "frontend" },
+  vue: { name: "Vue", icon: "vue", category: "frontend" },
+  tailwind: { name: "Tailwind CSS", icon: "tailwind", category: "frontend" },
+
+  docker: { name: "Docker", icon: "docker", category: "tools" },
+  git: { name: "Git", icon: "git", category: "tools" },
+  github: { name: "GitHub", icon: "github", category: "tools" },
+};
 
 const GITHUB_LANG_TO_TECH = {
-  "C#": { tech: "C#", category: "languages" },
-  "Java": { tech: "Java", category: "languages" },
-  "Python": { tech: "Python", category: "languages" },
-  "TypeScript": { tech: "TypeScript", category: "languages" },
-  "JavaScript": { tech: "JavaScript", category: "languages" },
-  "HTML": { tech: "HTML", category: "languages" },
-  "CSS": { tech: "CSS", category: "languages" },
+  "C#": "cs",
+  "Java": "java",
+  "Python": "python",
+  "TypeScript": "ts",
+  "JavaScript": "js",
+  "HTML": "html",
+  "CSS": "css"
 };
+
+const MANIFEST_RULES = [
+  { file: "package.json", contains: [
+    { match: /"react"\s*:/, tech: "react" },
+    { match: /"next"\s*:/, tech: "nextjs" },
+    { match: /"@angular\/core"\s*:/, tech: "angular" },
+    { match: /"vue"\s*:/, tech: "vue" },
+    { match: /"@nestjs\/core"\s*:/, tech: "nestjs" },
+    { match: /"express"\s*:/, tech: "express" },
+    { match: /"tailwindcss"\s*:/, tech: "tailwind" },
+    { match: /"socket\.io"\s*:/, tech: "socketio" },
+  ]},
+  { file: "requirements.txt", contains: [
+    { match: /fastapi/i, tech: "fastapi" },
+    { match: /django/i, tech: "django" },
+  ]},
+  { file: "pyproject.toml", contains: [
+    { match: /fastapi/i, tech: "fastapi" },
+    { match: /django/i, tech: "django" },
+  ]},
+  { file: "pom.xml", contains: [
+    { match: /spring-boot|org\.springframework/i, tech: "spring" },
+  ]},
+  { file: "build.gradle", contains: [
+    { match: /spring-boot|org\.springframework/i, tech: "spring" },
+  ]},
+  { file: "build.gradle.kts", contains: [
+    { match: /spring-boot|org\.springframework/i, tech: "spring" },
+  ]},
+  { file: "docker-compose.yml", contains: [
+    { match: /postgres/i, tech: "postgres" },
+    { match: /neo4j/i, tech: "neo4j" },
+    { match: /redis/i, tech: "redis" },
+    { match: /mysql/i, tech: "mysql" },
+    { match: /mongo/i, tech: "mongodb" },
+  ]},
+  { file: "docker-compose.yaml", contains: [
+    { match: /postgres/i, tech: "postgres" },
+    { match: /neo4j/i, tech: "neo4j" },
+    { match: /redis/i, tech: "redis" },
+    { match: /mysql/i, tech: "mysql" },
+    { match: /mongo/i, tech: "mongodb" },
+  ]},
+];
 
 async function gh(pathname) {
   const res = await fetch(`${API}${pathname}`, { headers });
@@ -116,13 +147,7 @@ async function getFileContent(owner, repo, filePath) {
 }
 
 async function detectTechForRepo(repo) {
-  const found = {
-    languages: new Set(),
-    backend: new Set(),
-    frontend: new Set(),
-    tools: new Set(),
-  };
-
+  const found = new Set();
   const [owner, name] = [repo.owner.login, repo.name];
 
   const langs = await gh(`/repos/${owner}/${name}/languages`);
@@ -131,11 +156,9 @@ async function detectTechForRepo(repo) {
     console.log(`${repo.full_name} languages:`, Object.keys(langs));
 
     for (const lang of Object.keys(langs)) {
-      const detected = GITHUB_LANG_TO_TECH[lang];
+      const tech = GITHUB_LANG_TO_TECH[lang];
 
-      if (detected) {
-        found[detected.category].add(detected.tech);
-      }
+      if (tech) found.add(tech);
     }
   }
 
@@ -158,64 +181,90 @@ async function detectTechForRepo(repo) {
       for (const c of rule.contains) {
         if (c.match.test(content)) {
           console.log(`${repo.full_name}: detected ${c.tech} from ${file.path}`);
-          found[c.category].add(c.tech);
+          found.add(c.tech);
         }
       }
     }
   }
 
-  const dockerfile = tree?.tree?.some(
-    (file) => file.type === "blob" && /^(.+\/)?Dockerfile$/.test(file.path)
-  );
+  if (tree && tree.tree) {
+    const hasDockerfile = tree.tree.some(
+      (file) => file.type === "blob" && /(^|\/)Dockerfile$/.test(file.path)
+    );
 
-  if (dockerfile) {
-    found.tools.add("Docker");
+    if (hasDockerfile) {
+      found.add("docker");
+    }
   }
 
   return found;
 }
 
-function mergeTech(target, source) {
-  for (const category of Object.keys(target)) {
-    for (const tech of source[category]) {
-      target[category].add(tech);
-    }
-  }
-}
-
 function formatCategory(title, technologies) {
-  if (technologies.size === 0) return "";
+  const detected = Array.from(technologies)
+    .map((tech) => TECH[tech])
+    .filter(Boolean)
+    .sort((a, b) => a.name.localeCompare(b.name));
 
-  const items = Array.from(technologies).sort();
+  if (detected.length === 0) return "";
 
-  return `### ${title}\n\n${items.map((tech) => `\`${tech}\``).join(" · ")}\n`;
+  const icons = detected
+    .filter((tech) => tech.icon)
+    .map((tech) => tech.icon);
+
+  const text = detected
+    .filter((tech) => !tech.icon)
+    .map((tech) => `\`${tech.name}\``)
+    .join(" · ");
+
+  let output = `### ${title}\n\n`;
+
+  if (icons.length > 0) {
+    output += `<p align="left">\n  <img src="https://skillicons.dev/icons?i=${icons.join(",")}" alt="${title}" />\n</p>\n`;
+  }
+
+  if (text) {
+    output += `\n${text}\n`;
+  }
+
+  return output;
 }
 
 async function main() {
   const repos = await listRepos();
 
-  const allTech = {
-    languages: new Set(),
-    backend: new Set(),
-    frontend: new Set(),
-    tools: new Set(["Git", "GitHub"]),
-  };
+  const allTech = new Set(["git", "github"]);
 
   for (const repo of repos) {
     try {
       const tech = await detectTechForRepo(repo);
 
-      mergeTech(allTech, tech);
+      for (const item of tech) {
+        allTech.add(item);
+      }
     } catch (err) {
-      console.warn(`Warning: could not analyze ${repo.name}: ${err.message}`);
+      console.warn(`Warning: could not analyze ${repo.full_name}: ${err.message}`);
+    }
+  }
+
+  const categories = {
+    languages: new Set(),
+    backend: new Set(),
+    frontend: new Set(),
+    tools: new Set(),
+  };
+
+  for (const tech of allTech) {
+    if (TECH[tech]) {
+      categories[TECH[tech].category].add(tech);
     }
   }
 
   const techStack = [
-    formatCategory("Languages", allTech.languages),
-    formatCategory("Backend", allTech.backend),
-    formatCategory("Frontend", allTech.frontend),
-    formatCategory("Tools", allTech.tools),
+    formatCategory("Languages", categories.languages),
+    formatCategory("Backend", categories.backend),
+    formatCategory("Frontend", categories.frontend),
+    formatCategory("Tools", categories.tools),
   ]
     .filter(Boolean)
     .join("\n");
@@ -225,14 +274,12 @@ async function main() {
   readme = readme.replace(
     /<!--TECH-STACK:START-->[\s\S]*?<!--TECH-STACK:END-->/,
     `<!--TECH-STACK:START-->
-    ${techStack}
-    <!--TECH-STACK:END-->`
+    ${techStack}<!--TECH-STACK:END-->`
   );
 
   writeFileSync(README_PATH, readme);
 
-  console.log("Detected tech stack:");
-  console.log(techStack);
+  console.log("Detected tech stack:", Array.from(allTech));
 }
 
 main().catch((err) => {
