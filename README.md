@@ -12,31 +12,30 @@ I'm always learning and experimenting with new technologies by building things.
 ## Tech Stack
 
 <!--TECH-STACK:START-->
-  ### Languages
-<p align="left">
-  <img src="https://skillicons.dev/icons?i=cs,css,html,java,js,python,ts" alt="Languages" />
-</p>
-
-
-### Backend
-<p align="left">
-  <img src="https://skillicons.dev/icons?i=django,fastapi,nestjs,postgres,spring" alt="Backend" />
-</p>
-`Socket.IO`
-
-
-### Frontend
-<p align="left">
-  <img src="https://skillicons.dev/icons?i=angular,nextjs,react,tailwind" alt="Frontend" />
-</p>
-
-
-### Tools
-<p align="left">
-  <img src="https://skillicons.dev/icons?i=docker,git,github" alt="Tools" />
-</p>
-
-<!--TECH-STACK:END-->
+  <table width="100%">
+  <tr>
+  <td width="25%" align="center" valign="top">
+<strong>Languages</strong>
+<br><br>
+<img src="https://skillicons.dev/icons?i=cs,css,html&perline=3" height="50"><br><img src="https://skillicons.dev/icons?i=java,js,python&perline=3" height="50"><br><img src="https://skillicons.dev/icons?i=ts&perline=3" height="50">
+</td>
+  <td width="25%" align="center" valign="top">
+<strong>Backend</strong>
+<br><br>
+<img src="https://skillicons.dev/icons?i=django,fastapi,nestjs&perline=3" height="50"><br><img src="https://skillicons.dev/icons?i=postgres,spring&perline=3" height="50">
+</td>
+  <td width="25%" align="center" valign="top">
+<strong>Frontend</strong>
+<br><br>
+<img src="https://skillicons.dev/icons?i=angular,nextjs,react&perline=3" height="50"><br><img src="https://skillicons.dev/icons?i=tailwind&perline=3" height="50">
+</td>
+  <td width="25%" align="center" valign="top">
+<strong>Tools</strong>
+<br><br>
+<img src="https://skillicons.dev/icons?i=docker,git,github&perline=3" height="50">
+</td>
+  </tr>
+  </table><!--TECH-STACK:END-->
 
 *(Auto-generated from my public repos — see the [workflow](.github/workflows/update-techstack.yml))*
 
