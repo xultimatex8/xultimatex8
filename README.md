@@ -12,31 +12,30 @@ I'm always learning and experimenting with new technologies by building things.
 ## Tech Stack
 
 <!--TECH-STACK:START-->
-    ### Languages
-
+  ### Languages
 <p align="left">
   <img src="https://skillicons.dev/icons?i=cs,css,html,java,js,python,ts" alt="Languages" />
 </p>
 
-### Backend
 
+### Backend
 <p align="left">
   <img src="https://skillicons.dev/icons?i=django,fastapi,nestjs,postgres,spring" alt="Backend" />
 </p>
-
 `Socket.IO`
 
-### Frontend
 
+### Frontend
 <p align="left">
   <img src="https://skillicons.dev/icons?i=angular,nextjs,react,tailwind" alt="Frontend" />
 </p>
 
-### Tools
 
+### Tools
 <p align="left">
   <img src="https://skillicons.dev/icons?i=docker,git,github" alt="Tools" />
 </p>
+
 <!--TECH-STACK:END-->
 
 *(Auto-generated from my public repos — see the [workflow](.github/workflows/update-techstack.yml))*
