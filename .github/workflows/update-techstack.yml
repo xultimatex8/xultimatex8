@@ -1,0 +1,36 @@
+name: Update Tech Stack
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+
+jobs:
+  update-techstack:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Scan repositories and update README
+        env:
+          GITHUB_USERNAME: xultimatex8
+          GH_TOKEN: ${{ secrets.TECHSTACK_PAT }}
+        run: node scripts/update-techstack.js
+
+      - name: Commit and push if there are changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git diff --staged --quiet || git commit -m "chore: auto-update tech stack"
+          git push
