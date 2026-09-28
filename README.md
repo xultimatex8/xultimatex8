@@ -22,7 +22,7 @@ I'm always learning and experimenting with new technologies by building things.
   <td width="25%" align="center" valign="top">
 <strong>Backend</strong>
 <br><br>
-<img src="https://skillicons.dev/icons?i=django,fastapi,nestjs&perline=3" height="50"><br><img src="https://skillicons.dev/icons?i=postgres,spring&perline=3" height="50">
+<img src="https://skillicons.dev/icons?i=django,fastapi,nestjs&perline=3" height="50"><br><img src="https://skillicons.dev/icons?i=postgres,redis,spring&perline=3" height="50">
 </td>
   <td width="25%" align="center" valign="top">
 <strong>Frontend</strong>
