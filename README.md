@@ -39,10 +39,27 @@ I'm always learning and experimenting with new technologies by building things.
 
 *(Auto-generated from my public repos — see the [workflow](.github/workflows/update-techstack.yml))*
 
+I use **GitHub Actions** for continuous integration and **Docker/Docker Compose** to keep development environments consistent and reproducible.
+
 
 ## Featured Projects
 
 <table>
+  <tr> 
+    <td align="center" width="30%"> 
+      <a href="https://github.com/xultimatex8/ukinory"> 
+        <img src="https://opengraph.githubassets.com/1/xultimatex8/ukinory" width="280" alt="Ukinory">
+      </a>
+    </td>
+    <td width="50%" valign="middle"> 
+      <strong><a href="https://github.com/xultimatex8/ukinory">Ukinory</a></strong><br>
+      Personalized movie recommendation platform built around Letterboxd data, semantic embeddings, vector search, and collaborative filtering. Includes a data pipeline integrating Letterboxd, TMDb, Wikidata, and Gemini, with Redis-based request pacing to coordinate external API calls, adaptive recommendations, personalized explanations, guest sessions, and export.
+    </td>
+    <td align="center" width="20%" valign="middle"> 
+      <img src="https://skillicons.dev/icons?i=python,django,redis,postgres,ts,react&perline=3" width="150" alt="Python, Django, Redis, PostgreSQL, TypeScript, React"> 
+    </td> 
+  </tr>
+
   <tr>
     <td align="center" width="30%">
       <a href="https://github.com/xultimatex8/UltimateGGx">
